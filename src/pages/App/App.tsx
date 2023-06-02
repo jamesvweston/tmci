@@ -15,9 +15,14 @@ function App() {
     setBookmarks(response.data)
   }
 
+  const deleteBookmark = async (bookmark: Bookmark) => {
+      const filtered = bookmarks.filter(item => item.id !== bookmark.id)
+      setBookmarks(filtered)
+  }
+
 const mapBookmarks = (): Array<React.ReactElement<HTMLOptionElement>> =>
     bookmarks.map((bookmark) => (
-        <BookmarkCard bookmark={bookmark} />
+        <BookmarkCard bookmark={bookmark} onDelete={() => deleteBookmark(bookmark)} key={`${bookmark.id}-key`}/>
     ));
 
   return (
